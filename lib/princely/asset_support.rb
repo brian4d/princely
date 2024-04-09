@@ -15,12 +15,12 @@ module Princely
     end
 
     def asset_file_path(asset)
-      if Rails.application.config.assets.compile
+      if Rails.application.assets.nil?
+        File.join(config.stylesheets_dir, "#{asset}.css")
+      else
         # Remove /assets/ from generated names and try and find a matching asset
         Rails.application.assets ||= Sprockets::Environment.new
         Rails.application.assets.find_asset(asset.gsub(%r{/assets/}, "")).try(:pathname) || asset
-      else
-        File.join(config.stylesheets_dir, "#{asset}.css")
       end
     end
   end
