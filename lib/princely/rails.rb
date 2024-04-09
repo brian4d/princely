@@ -5,7 +5,7 @@ if Mime::Type.lookup_by_extension(:pdf) != 'application/pdf'
 end
 
 if defined?(Rails)
-  if Rails::VERSION::MAJOR >= 5
+  if Rails::VERSION::MAJOR >= 4
     ActionController::Base.send(:prepend, Princely::PdfHelper)
   else
     ActionController::Base.send(:include, Princely::PdfHelper)
